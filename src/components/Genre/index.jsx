@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import styles from './styles.module.css';
 
-const Genre = ({ genres, filterGenre, setFilterGenre }) => {
+const Genre = ({ genres, filterGenre, setFilterGenre, setPage }) => {
   const onChange = ({ currentTarget: input }) => {
     if (input.checked) {
       const state = [...filterGenre, input.value];
@@ -10,6 +11,10 @@ const Genre = ({ genres, filterGenre, setFilterGenre }) => {
       setFilterGenre(state);
     }
   };
+
+  useEffect(() => {
+    setPage(1);
+  }, [filterGenre, setPage]);
 
   return (
     <div className={styles.container}>

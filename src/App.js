@@ -11,7 +11,6 @@ import Search from './components/Search';
 import './App.css';
 
 function App() {
-  // const [obj, setObj] = useState({});
   const [sort, setSort] = useState({ sort: 'rating', order: 'desc' });
   const [filterGenre, setFilterGenre] = useState([]);
   const [page, setPage] = useState(1);
@@ -27,8 +26,6 @@ function App() {
     limit,
   });
   const navigate = useNavigate();
-
-  console.log(data, isLoading);
 
   useEffect(() => {
     if (window.location.search) {
@@ -73,8 +70,7 @@ function App() {
           ) : (
             <>
               <div className="table_container">
-                <Table movies={data.movies ? data.movies : []} />
-
+                <Table movies={data.movies} />
                 <Pagination
                   limit={data.limit ? data.limit : 0}
                   total={data.total ? data.total : 0}
@@ -82,13 +78,19 @@ function App() {
                   setPage={setPage}
                 />
               </div>
-
               <div className="filter_container">
-                <Sort sort={sort} setSort={setSort} limit={limit} setLimit={setLimit} />
+                <Sort
+                  sort={sort}
+                  setSort={setSort}
+                  limit={limit}
+                  setLimit={setLimit}
+                  setPage={setPage}
+                />
                 <Genre
-                  filterGenre={filterGenre}
                   genres={data.genres ? data.genres : []}
+                  filterGenre={filterGenre}
                   setFilterGenre={setFilterGenre}
+                  setPage={setPage}
                 />
               </div>
             </>

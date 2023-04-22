@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import styles from './styles.module.css';
 
-const Sort = ({ sort, setSort, limit, setLimit }) => {
+const Sort = ({ sort, setSort, limit, setLimit, setPage }) => {
   const sorts = [
     { value: 'year,asc', title: 'Year(ascending)' },
     { value: 'year,desc', title: 'Year(descending)' },
@@ -8,6 +9,10 @@ const Sort = ({ sort, setSort, limit, setLimit }) => {
     { value: 'rating,desc', title: 'Rating(descending)' },
   ];
   const counts = [2, 3, 4, 5];
+
+  useEffect(() => {
+    setPage(1);
+  }, [limit, setPage]);
 
   const onSelectSortChange = (e) => {
     let obj = e.target.value.split(',');
